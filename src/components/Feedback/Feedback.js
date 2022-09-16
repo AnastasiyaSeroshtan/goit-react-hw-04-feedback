@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "../Box";
-import { FeedbackText, StatisticsText, Button, StatisticsItem } from "./Feedback.styled";
+import { FeedbackText, StatisticsText, Button, StatisticsItem, StatisticsItemTotal } from "./Feedback.styled";
 
 export class Feedback extends React.Component {
     state = {
@@ -33,7 +33,23 @@ export class Feedback extends React.Component {
         })
      };
 
+     countTotalFeedback = () =>{
+        return (
+            this.state.good + this.state.neutral + this.state.bad
+        )
+     };
+
+     countPositiveFeedbackPercentage = () => {
+        return (
+            this.state.good*100/this.countTotalFeedback()
+        )
+     };
+
     render() {
+        const total = this.countTotalFeedback();
+        const positeveFeedback = this.countPositiveFeedbackPercentage() ?
+        Math.ceil(this.countPositiveFeedbackPercentage())
+        : 0;
         return (
             <Box pl={5}>
                 <FeedbackText>Please leave feedback</FeedbackText>
@@ -43,10 +59,14 @@ export class Feedback extends React.Component {
                 <Button type="button" onClick={this.countsNumberClickBad}>Bad</Button>
                 </Box>
                 <StatisticsText>Statistics</StatisticsText>
-                <Box as="ul">
+                <Box as="ul" mb={4}>
                     <StatisticsItem>Good: {this.state.good} </StatisticsItem>
                     <StatisticsItem>Neutral: {this.state.neutral} </StatisticsItem>
                     <StatisticsItem>Bad: {this.state.bad} </StatisticsItem>
+                </Box>
+                <Box as="ul">
+                    <StatisticsItemTotal>Total:{total} </StatisticsItemTotal>
+                    <StatisticsItem>Positive feedback: {positeveFeedback}% </StatisticsItem>
                 </Box>
             </Box>
         )
