@@ -1,6 +1,8 @@
 import React from "react";
 import { Box } from "../Box";
-import { FeedbackText, StatisticsText, Button, StatisticsItem, StatisticsItemTotal } from "./Feedback.styled";
+import { Statistics } from "./Statistics/Statistics";
+import { FeedbackOptions } from "./FeedbackOptions/FeedbackOptions";
+import { Section} from "./Section/Section";
 
 export class Feedback extends React.Component {
     state = {
@@ -52,22 +54,19 @@ export class Feedback extends React.Component {
         : 0;
         return (
             <Box pl={5}>
-                <FeedbackText>Please leave feedback</FeedbackText>
-                <Box mb={5}>
-                <Button type="button" onClick={this.countsNumberClickGood}>Good</Button>
-                <Button type="button" onClick={this.countsNumberClickNeutral}>Neutral</Button>
-                <Button type="button" onClick={this.countsNumberClickBad}>Bad</Button>
-                </Box>
-                <StatisticsText>Statistics</StatisticsText>
-                <Box as="ul" mb={4}>
-                    <StatisticsItem>Good: {this.state.good} </StatisticsItem>
-                    <StatisticsItem>Neutral: {this.state.neutral} </StatisticsItem>
-                    <StatisticsItem>Bad: {this.state.bad} </StatisticsItem>
-                </Box>
-                <Box as="ul">
-                    <StatisticsItemTotal>Total:{total} </StatisticsItemTotal>
-                    <StatisticsItem>Positive feedback: {positeveFeedback}% </StatisticsItem>
-                </Box>
+                <Section title={"Please leave feedback"}>
+                    <FeedbackOptions 
+                        onClickGood={this.countsNumberClickGood} 
+                        onClickNeutral={this.countsNumberClickNeutral}
+                        onClickBad={this.countsNumberClickBad}/>
+                </Section>
+                <Section title={"Statistics"}>
+                    <Statistics good={this.state.good} 
+                                neutral={this.state.neutral} 
+                                bad={this.state.bad} 
+                                total={total} 
+                                positeveFeedback={positeveFeedback} />
+                </Section>
             </Box>
         )
     }
