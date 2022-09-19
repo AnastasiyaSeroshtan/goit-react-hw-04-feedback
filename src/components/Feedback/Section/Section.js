@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Box } from "../../Box";
 import { FeedbackText } from "./Section.styled";
 
@@ -9,3 +10,8 @@ export const Section = ({title, children}) => {
        </Box>
     )
 }; 
+
+Section.prototype = {
+    title: PropTypes.string,
+    children: PropTypes.object.isRequired,
+};

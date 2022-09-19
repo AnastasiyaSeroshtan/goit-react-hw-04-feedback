@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Box } from "../../Box";
 import { Button } from "./FeedbackOptions.styled";
 
@@ -9,4 +10,10 @@ export const FeedbackOptions = ({onClickGood, onClickNeutral, onClickBad}) => {
             <Button type="button" onClick={onClickBad}>Bad</Button>
         </Box>
     )
+};
+
+FeedbackOptions.prototype = {
+    onClickGood: PropTypes.func.isRequired,
+    onClickNeutral: PropTypes.func.isRequired,
+    onClickBad: PropTypes.func.isRequired,
 };
