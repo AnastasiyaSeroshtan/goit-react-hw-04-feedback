@@ -12,29 +12,13 @@ export class Feedback extends React.Component {
         bad: 0,
       }
 
-     countsNumberClickGood = () => {
-        this.setState(prevState => {
-            return {
-                good: prevState.good + 1,
-            }
-        })
-     };
-
-     countsNumberClickNeutral = () => {
-        this.setState(prevState => {
-            return {
-                neutral: prevState.neutral + 1,
-            }
-        })
-     };
-
-     countsNumberClickBad = () => {
-        this.setState(prevState => {
-            return {
-                bad: prevState.bad + 1,
-            }
-        })
-     };
+    countsNumberClick = (option) => {
+            this.setState(prevState => {
+                return {
+                    [option]: prevState[option] + 1,
+                }
+            })
+         };
 
      countTotalFeedback = () =>{
         return (
@@ -57,9 +41,8 @@ export class Feedback extends React.Component {
             <Box pl={5}>
                 <Section title={"Please leave feedback"}>
                     <FeedbackOptions 
-                        onClickGood={this.countsNumberClickGood} 
-                        onClickNeutral={this.countsNumberClickNeutral}
-                        onClickBad={this.countsNumberClickBad}/>
+                    options={Object.keys(this.state)}
+                    onLeaveFeedback={this.countsNumberClick}  />
                 </Section>
                 <Section title={"Statistics"}>
                     {total > 0 ? 
